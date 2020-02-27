@@ -10,7 +10,7 @@ GstMessage *msg;
 void break_RtspStream_Into_Frame()
 {
 		
-    pipeline = gst_parse_launch("gst-launch-1.0 -e multifilesrc location=framed/frame%d.png caps=image/png, framerate=30/1 ! pngdec ! 		                         videoconvert ! queue ! x264enc ! queue !   mp4mux ! filesink location=framed/output.mp4",   NULL); 
+    pipeline = gst_parse_launch("multifilesrc location=framed/frame%d.png caps=image/png, framerate=30/1 ! pngdec ! videoconvert ! queue ! x264enc ! queue !   mp4mux ! filesink location=framed/output.mp4",   NULL); 
     gst_element_set_state (pipeline, GST_STATE_PLAYING); 
     bus = gst_element_get_bus (pipeline); //wait for EOS
     msg = gst_bus_timed_pop_filtered (bus, GST_CLOCK_TIME_NONE,GST_MESSAGE_ERROR | GST_MESSAGE_EOS);
